@@ -1,5 +1,6 @@
 package com.example.blog.entity;
 
+import com.example.blog.dto.Req.ReqUpdateBoardDto;
 import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
@@ -37,4 +38,9 @@ public class Board {
 
     @CreationTimestamp
     private Timestamp createDate;
+
+    public void updateBoard(ReqUpdateBoardDto reqUpdateBoardDto) {
+        this.title = reqUpdateBoardDto.getTitle();
+        this.content = reqUpdateBoardDto.getContent();
+    }
 }

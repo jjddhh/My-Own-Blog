@@ -1,5 +1,6 @@
 package com.example.blog.entity;
 
+import com.example.blog.dto.Req.ReqUpdateUserDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -35,4 +36,9 @@ public class User {
 
     @CreationTimestamp
     private Timestamp createDate;
+
+    public void updateUser(ReqUpdateUserDto reqUpdateUserDto) {
+        this.password = reqUpdateUserDto.getPassword();
+        this.email = reqUpdateUserDto.getEmail();
+    }
 }

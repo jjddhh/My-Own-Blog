@@ -2,11 +2,16 @@ package com.example.blog.service;
 
 import com.example.blog.dto.Req.ReqSignInDto;
 import com.example.blog.dto.Req.ReqSignUpDto;
+import com.example.blog.dto.Req.ReqUpdateUserDto;
 import com.example.blog.dto.Resp.RespSignInDto;
 import com.example.blog.dto.Resp.RespSignUpDto;
 import com.example.blog.entity.User;
 import com.example.blog.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -27,6 +32,18 @@ public class UserService {
         // 유저 추가
         User user = userRepository.save(reqSignUpDto.toEntity());
         return RespSignUpDto.of(user);
+    }
+
+    @Transactional
+    public void 회원수정(ReqUpdateUserDto reqUpdateUserDto) {
+        User updateUser = userRepository.findById(reqUpdateUserDto.getId())
+                .orElseThrow(()-> new IllegalArgumentException("회원 찾기 실패"));
+
+        // password 암호화
+        String encPassword = encoder.encode(reqUpdateUserDto.getPassword());
+        reqUpdateUserDto.setPassword(encPassword);
+        // dirty check 이용한 update.
+        updateUser.updateUser(reqUpdateUserDto);
     }
 
     /*

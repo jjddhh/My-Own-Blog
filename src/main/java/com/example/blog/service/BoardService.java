@@ -2,6 +2,7 @@ package com.example.blog.service;
 
 import com.example.blog.dto.Req.ReqBoardDto;
 import com.example.blog.dto.Req.ReqSignUpDto;
+import com.example.blog.dto.Req.ReqUpdateBoardDto;
 import com.example.blog.dto.Resp.RespBoardDto;
 import com.example.blog.dto.Resp.RespSignUpDto;
 import com.example.blog.entity.Board;
@@ -28,7 +29,28 @@ public class BoardService {
         return RespBoardDto.of(savedBoard);
     }
 
+    @Transactional(readOnly = true)
     public Page<Board> 글목록(Pageable pageable) {
         return boardRepository.findAll(pageable);
+    }
+
+    @Transactional(readOnly = true)
+    public Board 글상세보기(Long id) {
+        return boardRepository.findById(id)
+                .orElseThrow(()-> new IllegalArgumentException("글 상세보기 실패 : 아이디를 찾을 수 없습니다."));
+    }
+
+    @Transactional
+    public void 글삭제하기(Long id) {
+        boardRepository.deleteById(id);
+    }
+
+    @Transactional
+    public void 글수정하기(Long id, ReqUpdateBoardDto reqUpdateBoardDto) {
+        // 해당 글 영속화.
+        Board foundBoard = boardRepository.findById(id)
+                .orElseThrow(()-> new IllegalArgumentException("글 수정하기 실패 : 아이디를 찾을 수 없습니다."));
+        // dirty check 이용한 수정.
+        foundBoard.updateBoard(reqUpdateBoardDto);
     }
 }
