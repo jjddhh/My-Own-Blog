@@ -1,9 +1,10 @@
 package com.example.blog.controller.api;
 
-import com.example.blog.dto.Req.ReqSignUpDto;
-import com.example.blog.dto.Resp.RespSignUpDto;
+import com.example.blog.dto.Req.ReqBoardDto;
+import com.example.blog.dto.Resp.RespBoardDto;
 import com.example.blog.entity.RoleType;
-import com.example.blog.service.UserService;
+import com.example.blog.entity.User;
+import com.example.blog.service.BoardService;
 import com.google.gson.Gson;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -11,7 +12,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -19,42 +19,42 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.hamcrest.Matchers.is;
 
 @ExtendWith(MockitoExtension.class)
-class UserApiControllerTest {
+class BoardApiControllerTest {
 
     @InjectMocks
-    private UserApiController userApiController;
+    private BoardApiController boardApiController;
 
     @Mock
-    private UserService userService;
+    private BoardService boardService;
 
     private MockMvc mockMvc;
 
     @BeforeEach
     public void init() {
-        mockMvc = MockMvcBuilders.standaloneSetup(userApiController).build();
+        mockMvc = MockMvcBuilders.standaloneSetup(boardApiController).build();
     }
 
-    @DisplayName("controller - 회원가입")
+    @DisplayName("controller - 글쓰기")
     @Test
-    public void 회원가입() throws Exception {
+    public void 글쓰기() throws Exception {
         //given
-        ReqSignUpDto request = reqSignUpDto();
-        RespSignUpDto response = respSignUpDto();
+        ReqBoardDto request = reqBoardDto();
+        RespBoardDto response = respBoardDto();
 
-        doReturn(response).when(userService)
-                .회원가입(any(ReqSignUpDto.class));
+        doReturn(response).when(boardService)
+                .글쓰기(any(ReqBoardDto.class), any());
 
         //when
         ResultActions resultActions = mockMvc.perform(
-                MockMvcRequestBuilders.post("/auth/joinProc")
+                MockMvcRequestBuilders.post("/api/board")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(new Gson().toJson(request))
         );
@@ -62,27 +62,23 @@ class UserApiControllerTest {
         //then
         MvcResult mvcResult = resultActions
                 .andExpect(jsonPath("$.status", is(HttpStatus.OK.value())))
-                .andExpect(jsonPath("$.data.username", is(response.getUsername())))
-                .andExpect(jsonPath("$.data.password", is(response.getPassword())))
-                .andExpect(jsonPath("$.data.email", is(response.getEmail())))
-                .andExpect(jsonPath("$.data.role", is("USER")))
+                .andExpect(jsonPath("$.data.title", is(response.getTitle())))
+                .andExpect(jsonPath("$.data.content", is(response.getContent())))
                 .andReturn();
+
     }
 
-    private RespSignUpDto respSignUpDto() {
-        return RespSignUpDto.builder()
-                .username("test")
-                .password("1234")
-                .email("test@test.com")
-                .role(RoleType.USER)
+    private RespBoardDto respBoardDto() {
+        return RespBoardDto.builder()
+                .title("제목")
+                .content("내용")
                 .build();
     }
 
-    private ReqSignUpDto reqSignUpDto() {
-        return ReqSignUpDto.builder()
-                .username("test")
-                .password("1234")
-                .email("test@test.com")
+    private ReqBoardDto reqBoardDto() {
+        return ReqBoardDto.builder()
+                .title("제목")
+                .content("내용")
                 .build();
     }
 }

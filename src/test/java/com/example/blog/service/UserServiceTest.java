@@ -47,15 +47,6 @@ class UserServiceTest {
         assertThat(user.getRole()).isEqualTo(RoleType.USER);
     }
 
-    private RespSignUpDto respSignUpDto() {
-        return RespSignUpDto.builder()
-                .username("test")
-                .password("1234")
-                .email("test@test.com")
-                .role(RoleType.USER)
-                .build();
-    }
-
     private ReqSignUpDto reqSignUpDto() {
         return ReqSignUpDto.builder()
                 .username("test")
