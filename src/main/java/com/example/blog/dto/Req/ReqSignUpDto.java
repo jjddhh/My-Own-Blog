@@ -19,12 +19,15 @@ public class ReqSignUpDto {
 
     private String email;
 
+    private String oauth;
+
     public User toEntity() {
         return User.builder()
                 .username(this.username)
                 .password(this.password)
                 .email(this.email)
                 .role(RoleType.USER)
+                .oauth(oauth)
                 .build();
     }
 }

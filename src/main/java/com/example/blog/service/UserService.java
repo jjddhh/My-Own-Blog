@@ -39,11 +39,21 @@ public class UserService {
         User updateUser = userRepository.findById(reqUpdateUserDto.getId())
                 .orElseThrow(()-> new IllegalArgumentException("회원 찾기 실패"));
 
-        // password 암호화
-        String encPassword = encoder.encode(reqUpdateUserDto.getPassword());
-        reqUpdateUserDto.setPassword(encPassword);
-        // dirty check 이용한 update.
-        updateUser.updateUser(reqUpdateUserDto);
+        // Kakao Oauth 유저들은 정보수정 불가.
+        if(updateUser.getOauth() == null || updateUser.getOauth().equals("")){
+            // password 암호화
+            String encPassword = encoder.encode(reqUpdateUserDto.getPassword());
+            reqUpdateUserDto.setPassword(encPassword);
+            // dirty check 이용한 update.
+            updateUser.updateUser(reqUpdateUserDto);
+        }
+    }
+
+    @Transactional(readOnly = true)
+    public Boolean 회원가입여부(String username) {
+        User user = userRepository.findByUsername(username).orElseGet(()-> null);
+        if(user == null) return false;
+        else return true;
     }
 
     /*
