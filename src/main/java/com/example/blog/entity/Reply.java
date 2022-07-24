@@ -2,12 +2,14 @@ package com.example.blog.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
 
+@Getter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -32,4 +34,12 @@ public class Reply {
 
     @CreationTimestamp
     private Timestamp createDate;
+
+    public static Reply of(User user, Board board, String content) {
+        return Reply.builder()
+                .user(user)
+                .board(board)
+                .content(content)
+                .build();
+    }
 }

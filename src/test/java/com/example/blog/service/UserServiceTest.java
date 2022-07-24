@@ -19,6 +19,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doReturn;
 
+
 @ExtendWith(MockitoExtension.class)
 class UserServiceTest {
 
@@ -35,7 +36,7 @@ class UserServiceTest {
         ReqSignUpDto request = reqSignUpDto();
 
         doReturn(request.toEntity()).when(userRepository)
-                .save(any(User.class));
+                .save(any());
 
         //when
         RespSignUpDto user = userService.회원가입(request);

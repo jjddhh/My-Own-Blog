@@ -3,6 +3,7 @@ package com.example.blog.controller.api;
 import com.example.blog.config.auth.PrincipalDetail;
 import com.example.blog.dto.CommonResponseDto;
 import com.example.blog.dto.Req.ReqBoardDto;
+import com.example.blog.dto.Req.ReqReplyDto;
 import com.example.blog.dto.Req.ReqSignUpDto;
 import com.example.blog.dto.Req.ReqUpdateBoardDto;
 import com.example.blog.dto.Resp.RespBoardDto;
@@ -35,6 +36,13 @@ public class BoardApiController {
     @PutMapping("/api/board/{id}")
     public CommonResponseDto<?> 글수정하기(@PathVariable Long id, @RequestBody ReqUpdateBoardDto reqUpdateBoardDto) {
         boardService.글수정하기(id, reqUpdateBoardDto);
+        return new CommonResponseDto<>(HttpStatus.OK.value(), 1);
+    }
+
+    @PostMapping("/api/board/{boardId}/reply")
+    public CommonResponseDto<?> 댓글등록(@RequestBody ReqReplyDto reqReplyDto, @AuthenticationPrincipal PrincipalDetail principalDetail) {
+
+        boardService.댓글등록(principalDetail.getUser(), reqReplyDto);
         return new CommonResponseDto<>(HttpStatus.OK.value(), 1);
     }
 
