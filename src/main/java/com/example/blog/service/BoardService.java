@@ -68,4 +68,9 @@ public class BoardService {
 
         replyRepository.mSave(reqReplyDto.getUserId(), reqReplyDto.getBoardId(), reqReplyDto.getContent());
     }
+
+    @Transactional
+    public void 댓글삭제(Long replyId) {
+        replyRepository.deleteById(replyId);
+    }
 }

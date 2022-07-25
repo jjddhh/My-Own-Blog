@@ -41,8 +41,13 @@ public class BoardApiController {
 
     @PostMapping("/api/board/{boardId}/reply")
     public CommonResponseDto<?> 댓글등록(@RequestBody ReqReplyDto reqReplyDto, @AuthenticationPrincipal PrincipalDetail principalDetail) {
-
         boardService.댓글등록(principalDetail.getUser(), reqReplyDto);
+        return new CommonResponseDto<>(HttpStatus.OK.value(), 1);
+    }
+
+    @DeleteMapping("/api/board/{boardId}/reply/{replyId}")
+    public CommonResponseDto<?> 댓글삭제(@PathVariable Long replyId) {
+        boardService.댓글삭제(replyId);
         return new CommonResponseDto<>(HttpStatus.OK.value(), 1);
     }
 

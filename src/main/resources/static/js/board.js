@@ -99,6 +99,19 @@ let index = {
         }).fail(function (error) {
             alert(JSON.stringify(error))
         });
+    },
+
+    replyDelete: function (boardId, replyId) {
+        $.ajax({
+            type: "DELETE",
+            url: `/api/board/${boardId}/reply/${replyId}`,
+            dataType: "json" // 응답 받을 타입
+        }).done(function (resp) {
+            alert("댓글삭제 성공");
+            location.href= `/board/${boardId}`;
+        }).fail(function (error) {
+            alert(JSON.stringify(error))
+        });
     }
 }
 
