@@ -29,17 +29,17 @@ public class BoardController {
     @GetMapping("/board/{id}")
     public String findById(@PathVariable Long id, Model model) {
         model.addAttribute("board", boardService.글상세보기(id));
-        return "/board/detail";
+        return "board/detail";
     }
 
     @GetMapping("/board/saveForm")
     public String saveForm() {
-        return "/board/saveForm";
+        return "board/saveForm";
     }
 
     @GetMapping("/board/{id}/updateForm")
     public String updateForm(@PathVariable Long id, Model model) {
         model.addAttribute("board", boardService.글상세보기(id));
-        return "/board/updateForm";
+        return "board/updateForm";
     }
 }
