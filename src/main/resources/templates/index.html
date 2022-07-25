@@ -1,11 +1,11 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <header>
-    <header th:replace="/layout/header.html :: fragment-header"></header>
+    <header th:replace="layout/header.html :: fragment-header"></header>
 </header>
 
 <body>
-<div th:replace="/layout/nav.html :: fragment-nav"></div>
+<div th:replace="layout/nav.html :: fragment-nav"></div>
 
 <div class="container">
 
@@ -38,7 +38,7 @@
     <li class="page-item disabled"><a class="page-link" th:href="@{?page={num}(num=${boards.getNumber()+1})}">Next</a></li>
 </ul>
 
-<footer th:replace="/layout/footer.html :: fragment-footer"></footer>
+<footer th:replace="layout/footer.html :: fragment-footer"></footer>
 </body>
 </html>
 
