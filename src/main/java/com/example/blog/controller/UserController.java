@@ -75,7 +75,7 @@ public class UserController {
         MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
         params.add("grant_type", "authorization_code");
         params.add("client_id", "f7d211268c8d63cb28a8d381be2d5bf2");
-        params.add("redirect_uri", "http://localhost:8080/auth/kakao/callback");
+        params.add("redirect_uri", "http://ec2-43-200-157-235.ap-northeast-2.compute.amazonaws.com:8080/auth/kakao/callback");
         params.add("code", code);
 
         HttpEntity<MultiValueMap<String, String>> kakaoTokenRequest = new HttpEntity<>(params, httpHeaders);
