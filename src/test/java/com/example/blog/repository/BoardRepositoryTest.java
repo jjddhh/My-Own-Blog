@@ -3,11 +3,13 @@ package com.example.blog.repository;
 import com.example.blog.entity.Board;
 import com.example.blog.entity.RoleType;
 import com.example.blog.entity.User;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -18,6 +20,7 @@ class BoardRepositoryTest {
     @Autowired
     private BoardRepository boardRepository;
 
+    @Disabled
     @DisplayName("글 추가")
     @Test
     public void saveBoard() throws Exception {

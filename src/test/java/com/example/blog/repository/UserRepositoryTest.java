@@ -3,6 +3,7 @@ package com.example.blog.repository;
 import com.example.blog.entity.RoleType;
 import com.example.blog.entity.User;
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,7 @@ class UserRepositoryTest {
     @Autowired
     private UserRepository userRepository;
 
+    @Disabled
     @DisplayName("사용자 추가")
     @Test
     public void saveUser() throws Exception {

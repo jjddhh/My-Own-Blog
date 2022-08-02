@@ -3,6 +3,7 @@ package com.example.blog.entity;
 import com.example.blog.dto.Req.ReqUpdateBoardDto;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
+import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
 
