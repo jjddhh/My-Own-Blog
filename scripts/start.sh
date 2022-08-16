@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 PROJECT_ROOT="/home/ec2-user/app/step1"
-JAR_FILE="$PROJECT_ROOT/blog-0.0.1-SNAPSHOT.jar"
+JAR_FILE="$PROJECT_ROOT/blog.*.SNAPSHOT.jar"
 
 APP_LOG="$PROJECT_ROOT/application.log"
 ERROR_LOG="$PROJECT_ROOT/error.log"
