@@ -13,8 +13,8 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
-@DataJpaTest
-@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
+//@DataJpaTest
+//@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 class UserRepositoryTest {
 
     @Autowired
@@ -22,7 +22,7 @@ class UserRepositoryTest {
 
     @Disabled
     @DisplayName("사용자 추가")
-    @Test
+    //@Test
     public void saveUser() throws Exception {
         //given
         User user = user();

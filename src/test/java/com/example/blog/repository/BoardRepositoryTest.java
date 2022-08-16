@@ -13,8 +13,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@DataJpaTest
-@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
+//@DataJpaTest
+//@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 class BoardRepositoryTest {
 
     @Autowired
@@ -22,7 +22,7 @@ class BoardRepositoryTest {
 
     @Disabled
     @DisplayName("글 추가")
-    @Test
+    //@Test
     public void saveBoard() throws Exception {
         //given
         Board board = board();
