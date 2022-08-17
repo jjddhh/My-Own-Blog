@@ -17,7 +17,7 @@ cp $PROJECT_ROOT/build/libs/*.jar $JAR_FILE
 echo "$TIME_NOW > $JAR_FILE 파일 실행"
 nohup java -jar \
          -Dspring.config.location=/home/ec2-user/app/application.properties \
-         $REPOSITORY/$JAR_NAME 2>&1 &
+         $JAR_FILE 2>&1 &
 
 CURRENT_PID=$(pgrep -f $JAR_FILE)
 echo "$TIME_NOW > 실행된 프로세스 아이디 $CURRENT_PID 입니다."
