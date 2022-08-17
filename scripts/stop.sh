@@ -3,7 +3,7 @@
 TIME_NOW=$(date +%c)
 
 # 현재 구동 중인 애플리케이션 pid 확인
-CURRENT_PID=$(pgrep -fl blog | grep jar | awk '{print $1}')
+CURRENT_PID=$(pgrep -fl blog | grep java | awk '{print $1}')
 
 # 프로세스가 켜져 있으면 종료
 if [ -z $CURRENT_PID ]; then
